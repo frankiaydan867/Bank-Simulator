@@ -13,8 +13,8 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=dylib
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/banksimulator
-OUTPUT_BASENAME=banksimulator
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bank_simulator
+OUTPUT_BASENAME=bank_simulator
 PACKAGE_TOP_DIR=banksimulator/
 
 # Functions

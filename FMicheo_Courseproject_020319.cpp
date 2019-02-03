@@ -105,6 +105,11 @@ void TimedSimulation(deque<Client> &c, bool t);
 
 void Report(deque<Client> c);
 
+void TotalCustomers(deque<Client> c);
+
+void ArrivalTimeAndLOS(deque<Client> c);
+
+void AverageWaitTime(deque<Client> c);
 
 int main(int argc, char** argv) {
 
@@ -134,7 +139,34 @@ int main(int argc, char** argv) {
             TimedSimulation(client, tm);
             goto MAINMENU;
         case 2:
-            Report(client);
+            REPORTS:
+            ClearScreen();
+            selection = NULL;
+            cout << "\n\n1-Total Customers\n2-Arrival Time and Length of Service\n"
+                    "3-Average Customer Wait Time\n4-Go Back\n\nSelection:";
+            cin >> selection;
+            
+            switch(selection){
+                case 1: //Total Customers
+                    ClearScreen();
+                    TotalCustomers(client);
+                    goto REPORTS;
+                case 2:  //Arrival Time and LOS
+                    ClearScreen();
+                    ArrivalTimeAndLOS(client);
+                    goto REPORTS;
+                case 3:  //Average customer WT
+                    ClearScreen();
+                    AverageWaitTime(client);
+                    goto REPORTS;
+                case 4: //Go back to main menu
+                    goto MAINMENU;
+                default:
+                    cout << "Invalid Selection... Please Try Again.";
+                    sleep(1);
+                    goto REPORTS;
+            }
+            //Report(client); //Full report
             goto MAINMENU;
         case 3:
             cout << "\nBye!";
@@ -156,6 +188,7 @@ void ClearScreen(){
 }
 
 void Header(){
+    //ClearScreen();
     for(int i = 0; i < 41; i++){
         cout << "*";
     }
@@ -312,4 +345,122 @@ void Report(deque<Client> c){
    cout << "Exit? (Y): ";
    cin >> s;
    
+}
+
+void TotalCustomers(deque<Client> c){
+    
+    Client client;
+    int TotalCustomers = c.size();
+    int CustomersByHour[3] = {0,0,0};
+    int count = 0;
+    string time;
+    string s;
+    
+    
+    while(!c.empty()){
+        client = c.front();
+        time = client.getArrivalTime();
+        time = time.substr(0,2);
+        if(time == "10"){
+            CustomersByHour[0]++;
+        }
+        else if(time == "11"){
+            CustomersByHour[1]++;
+        }
+        else if(time == "12"){
+            CustomersByHour[2]++;
+        }
+        
+        c.pop_front();
+    }
+    
+    cout << "Stats:\n----------------------------\n";
+    cout << "Total Customers Served: " << TotalCustomers;
+    cout << "\nCustomers Served from 10am to 11am: " << CustomersByHour[0];
+    cout << "\nCustomers Served from 11am to 12pm: " << CustomersByHour[1];
+    cout << "\nCustomers Served from 12pm to 1pm: " << CustomersByHour[2];
+    
+    cout << "\n\nPress any key to exit:";
+    cin >> s;
+}
+
+void ArrivalTimeAndLOS(deque<Client> c){
+    Client client;
+    int index = 1;
+    string s;
+
+    cout << "\nClients Arrival Time and Length of Service\n\n";
+
+    
+    //Table Header
+    cout << left << setw(5) << "#"
+            << left << setw(15) << "Arrival Time"
+            << left << setw(1) << "Length of Service\n";
+
+    
+    for(int i = 0; i < 45;i++){
+       cout << "-";
+    } 
+   cout << endl;
+   
+      
+   //Print all data for each client
+   while(!c.empty()){
+       client = c.back();
+
+       cout << left << setw(5) << index  
+            << left << setw(15) << client.getArrivalTime()
+            << left << setw(1) << client.getLenghtOfService() << " minute(s)" << endl;
+       index++;
+       
+       c.pop_back();
+   }
+   
+   cout << "\n\nPress any key to continue";
+   cin >> s;
+}
+
+void AverageWaitTime(deque<Client> c){
+    Client client;
+    double total[4];
+    double AverageTime[4] = {0,0,0,0};
+    int AverageByHour[3] = {0,0,0};
+    int count = 0;
+    string time;
+    string arrival;
+    string s;
+    
+    total[0] = c.size(); //Hold the total for the whole time;
+    
+    while(!c.empty()){
+        client = c.front();
+        time = client.getWaitingTime();
+        arrival = client.getArrivalTime();
+        arrival = arrival.substr(0,2);
+        AverageTime[0] += stod(time);
+        if(arrival == "10"){
+            total[1]++;
+            AverageTime[1] += stod(time);
+
+        }
+        else if(arrival == "11"){
+            total[2]++;
+            AverageTime[2] += stod(time);
+        }
+        else if(arrival == "12"){
+            total[3]++;
+            AverageTime[3] += stod(time);
+        }
+        
+        c.pop_front();
+    }
+    
+    cout << "Stats:\n----------------------------\n";
+    cout << "Average Wait Time: " << AverageTime[0] / total[0];
+    cout << "\nAverage Wait Time 10am to 11am: " << AverageTime[1]/total[1];
+    cout << "\nCAverage Wait Time from 11am to 12pm: " << AverageTime[2]/total[2];
+    cout << "\nAverage Wait Time from 12pm to 1pm: " << AverageTime[3]/total[3];
+    
+    cout << "\n\nPress any key to exit:";
+    cin >> s;
 }

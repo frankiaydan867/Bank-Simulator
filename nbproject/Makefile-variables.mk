@@ -9,16 +9,16 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=CLang-MacOSX
 CND_ARTIFACT_DIR_Debug=dist/Debug/CLang-MacOSX
-CND_ARTIFACT_NAME_Debug=banksimulator
-CND_ARTIFACT_PATH_Debug=dist/Debug/CLang-MacOSX/banksimulator
+CND_ARTIFACT_NAME_Debug=bank_simulator
+CND_ARTIFACT_PATH_Debug=dist/Debug/CLang-MacOSX/bank_simulator
 CND_PACKAGE_DIR_Debug=dist/Debug/CLang-MacOSX/package
 CND_PACKAGE_NAME_Debug=banksimulator.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/CLang-MacOSX/package/banksimulator.tar
 # Release configuration
 CND_PLATFORM_Release=CLang-MacOSX
 CND_ARTIFACT_DIR_Release=dist/Release/CLang-MacOSX
-CND_ARTIFACT_NAME_Release=banksimulator
-CND_ARTIFACT_PATH_Release=dist/Release/CLang-MacOSX/banksimulator
+CND_ARTIFACT_NAME_Release=bank_simulator
+CND_ARTIFACT_PATH_Release=dist/Release/CLang-MacOSX/bank_simulator
 CND_PACKAGE_DIR_Release=dist/Release/CLang-MacOSX/package
 CND_PACKAGE_NAME_Release=banksimulator.tar
 CND_PACKAGE_PATH_Release=dist/Release/CLang-MacOSX/package/banksimulator.tar
